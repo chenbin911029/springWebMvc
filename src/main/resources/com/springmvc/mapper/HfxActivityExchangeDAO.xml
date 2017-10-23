@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springmvc.dao.HfxActivityExchangeDAO" >
+    <resultMap id="HfxActivityExchange" type="com.springmvc.pojo.HfxActivityExchange" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="user_id" property="userId" jdbcType="BIGINT" />
+        <result column="user_name" property="userName" jdbcType="VARCHAR" />
+        <result column="exchange_time" property="exchangeTime" jdbcType="TIMESTAMP" />
+        <result column="spend_reputation" property="spendReputation" jdbcType="INTEGER" />
+        <result column="prizes_code" property="prizesCode" jdbcType="INTEGER" />
+        <result column="prizes_name" property="prizesName" jdbcType="VARCHAR" />
+        <result column="prizes_type" property="prizesType" jdbcType="INTEGER" />
+        <result column="pay_status" property="payStatus" jdbcType="INTEGER" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="allColumns" >
+        id,
+        user_id,
+        user_name,
+        exchange_time,
+        spend_reputation,
+        prizes_code,
+        prizes_name,
+        prizes_type,
+        pay_status,
+        create_time,
+        update_time,
+        status,
+        remark
+    </sql>
+
+    <!--插入用户兑换奖品记录-->
+    <insert id="insertHfxExchange" parameterType="com.springmvc.pojo.HfxActivityExchange">
+        INSERT INTO pc_activity_hfx_exchange (<include refid="allColumns"/>)
+        VALUES
+        (
+        #{id,jdbcType=VARCHAR},
+        #{userId,jdbcType=BIGINT},
+        #{userName,jdbcType=VARCHAR},
+        #{exchangeTime,jdbcType=TIMESTAMP},
+        #{spendReputation,jdbcType=INTEGER},
+        #{prizesCode,jdbcType=INTEGER},
+        #{prizesName,jdbcType=VARCHAR},
+        #{prizesType,jdbcType=INTEGER},
+        #{payStatus,jdbcType=INTEGER},
+        NOW(),
+        NOW(),
+        #{status,jdbcType=INTEGER},
+        #{remark,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <!--根据userId查询兑换奖品记录--><!--resultType="java.util.Map" -->
+    <select id="selectHfxExchangeByUserId"  resultMap="HfxActivityExchange">
+        SELECT  <include refid="allColumns"/>
+        FROM pc_activity_hfx_exchange
+        WHERE status = 0
+         limit 10
+    </select>
+
+
+</mapper>

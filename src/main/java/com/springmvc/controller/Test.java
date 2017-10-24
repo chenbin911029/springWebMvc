@@ -68,6 +68,7 @@ public class Test {
         countries.add("FRANCE");
         countries.add("GERMANY");
         countries.add("ITALY");
+        countries.add("UK");
         countries.add("OTHER");
         return countries;
     }

@@ -18,4 +18,5 @@
 
     <import resource="classpath:applicationContext-mvc.xml" />
     <import resource="classpath:applicationContext-jdbc.xml" />
+    <import resource="classpath:applicationContext-task.xml" />
 </beans>

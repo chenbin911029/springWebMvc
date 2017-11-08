@@ -20,6 +20,46 @@ cron：指定cron表达式
 fixedDelay：即表示从上一个任务完成开始到下一个任务开始的间隔，单位是毫秒。
 fixedRate：即从上一个任务开始到下一个任务开始的间隔，单位是毫秒。
 
+Java 定时任务
+1.创建TimerTask实例对象，覆写run方法。
+2.使用Timer定时调用task任务，timer.scheduleAtFixedRate(task,delay,intevalPeriod).
+
+Timer的缺陷
+1.Timer管理时间延迟缺陷，如果存在多个线程，后面的线程要等前面的任务执行完才会开始。
+同步，sychronized.
+2.Timer抛出异常缺陷
+timer 抛出异常后，会终止所有任务的运行。
+对于Timer的缺陷，我们可以考虑 ScheduledThreadPoolExecutor 来替代。
+Timer是基于绝对时间的，对系统时间比较敏感，而ScheduledThreadPoolExecutor 则是基于相对时间；
+Timer是内部是单一线程，而ScheduledThreadPoolExecutor内部是个线程池，所以可以支持多个任务并发执行。
+
+scheduledExecutorService
+用ScheduledExecutorService替代Timer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

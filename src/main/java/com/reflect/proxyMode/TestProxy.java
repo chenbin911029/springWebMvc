@@ -22,7 +22,7 @@ public class TestProxy {
                 realSubject.getClass().getInterfaces(),//实现类的接口数组
                 handler);//代理类实例
         System.out.println(subject.getClass());
-        //代理对象调用目标类的方法
+        //用代理对象调用目标类的方法
         subject.Request();
     }
 

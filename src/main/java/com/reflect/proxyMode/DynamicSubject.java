@@ -4,7 +4,7 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
 /**
- * 定义动态代理类
+ * 定义代理类
  *
  * @author chenbin at 2017/11/9 14:25
  */

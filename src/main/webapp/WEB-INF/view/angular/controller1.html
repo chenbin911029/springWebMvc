@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app="myApp3" ng-controller="personCtrl">
+<head>
+    <meta charset="utf-8">
+    <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <style> </style>
+</head>
+
+<body>
+    <div>
+        First Name: <input type="text" ng-model="firstName"><br>
+        Last Name: <input type="text" ng-model="lastName"><br>
+        <br>
+        Full Name: {{firstName | uppercase }} {{lastName}}
+    </div>
+    <div>
+        <input type="number" ng-model="quantity">
+        <input type="number" ng-model="price">
+        <p>总价 = {{ (quantity * price) | currency }}</p>
+    </div>
+    <script src="personController.js"></script>
+</body>
+</html>

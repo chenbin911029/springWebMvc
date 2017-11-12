@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="myApp2">
+<head>
+    <meta charset="utf-8">
+    <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <div ng-controller="myCtrl2">
+        <input ng-model="name">
+        <h1>{{greeting}}</h1>
+        <button ng-click="sayHello()">点我</button>
+    </div>
+    <div ng-controller="myCtrl3">
+        <ul>
+            <li ng-repeat="x in nameArray">{{x}} {{lastName}}</li>
+        </ul>
+    </div>
+
+    <script>
+        var app = angular.module('myApp2',[]);
+        app.controller('myCtrl2',function($scope,$rootScope){
+            $scope.name="vivo";
+            $scope.sayHello = function() {
+                $scope.greeting = 'Hello ' + $scope.name + '!';
+            };
+
+            $rootScope.lastName="chan";//全局变量
+        });
+
+        app.controller('myCtrl3',function($scope){
+            $scope.nameArray = ["Emil","Tobias","Linus"];
+        });
+    </script>
+</body>
+</html>

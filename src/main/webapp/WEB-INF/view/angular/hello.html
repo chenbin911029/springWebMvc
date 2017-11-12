@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    </head>
+    <body>
+        <div ng-app="myApp" ng-controller="myCtrl"
+             ng-init="person={firstName:'John',lastName:'Doe'};
+                      names=['Jani','Hege','Kai']">
+            <p>姓 : <input type="text" ng-model="firstName"></p>
+            <p>名 : <input type="text" ng-model="lastName"></p>
+            <h1>Hello {{firstName + lastName}}</h1>
+            姓名：<p ng-bind="firstName + lastName"></p>
+            数据绑定:姓氏<p ng-bind="person.lastName"></p>
+
+            循环数组:
+            <li ng-repeat="x in names">
+                {{x}}
+            </li>
+
+            <self-Directive></self-Directive>
+
+        </div>
+    </body>
+    <script>
+        var app = angular.module('myApp',[]);
+        app.controller('myCtrl',function($scope){
+            $scope.firstName = "陈";
+            $scope.lastName = "雪莲";
+        });
+
+        app.directive("selfDirective",function(){
+            return {
+              template:"<h1>自定义指令</h1>"
+            };
+        });
+    </script>
+</html>
+
+<!--
+notes:
+1.ng-app=" "  定义angularJS的使用范围；
+2.ng-init="变量=值;变量='值'"  初始化变量的值，有多个变量时，中间用分号隔开；
+3.ng-model="变量"  定义变量名；
+4.ng-bind="变量"  绑定变量名，获取该变量的数据。这里的变量就是第3条的变量名。
+但是一般都用双重花括号来获取变量的值，比如：{{变量}}。
+-->

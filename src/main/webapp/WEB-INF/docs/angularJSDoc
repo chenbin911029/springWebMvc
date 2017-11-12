@@ -1,0 +1,57 @@
+AngularJS 中文网
+模板(Template)
+指令(Directive)
+模型(Model)
+作用域(Scope)
+表达式(Expression)
+编译器(Compiler)
+过滤器(Filter)
+视图(View)
+数据绑定(Data Binding)
+控制器(Controller)
+依赖注入(Dependency Injection)
+注入器(Injector)
+模块(Module)
+服务(Service)
+添加UI逻辑：控制器
+notes:
+1.ng-app=" "  定义angularJS的使用范围；
+2.ng-init="变量=值;变量='值'"  初始化变量的值，有多个变量时，中间用分号隔开；
+3.ng-model="变量"  定义变量名；
+4.ng-bind="变量"  绑定变量名，获取该变量的数据。这里的变量就是第3条的变量名。
+但是一般都用双重花括号来获取变量的值，比如：{{变量}}。
+AngularJS 表达式:
+AngularJS 表达式写在双大括号内：{{ expression }}。
+AngularJS 表达式把数据绑定到 HTML，这与 ng-bind 指令有异曲同工之妙。
+AngularJS 将在表达式书写的位置"输出"数据。
+
+AngularJS 表达式 与 JavaScript 表达式
+类似于 JavaScript 表达式，AngularJS 表达式可以包含字母，操作符，变量。
+与 JavaScript 表达式不同，AngularJS 表达式可以写在 HTML 中。
+与 JavaScript 表达式不同，AngularJS 表达式不支持条件判断，循环及异常。
+与 JavaScript 表达式不同，AngularJS 表达式支持过滤器。
+
+AngularJS 指令
+AngularJS 指令是扩展的 HTML 属性，带有前缀 ng-。
+ng-app 指令初始化一个 AngularJS 应用程序。
+ng-init 指令初始化应用程序数据。
+ng-model 指令把元素值（比如输入域的值）绑定到应用程序。
+
+ng-app 指令
+ng-app 指令定义了 AngularJS 应用程序的 根元素。
+ng-app 指令在网页加载完毕时会自动引导（自动初始化）应用程序。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

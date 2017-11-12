@@ -17,6 +17,31 @@
         </ul>
         <input ng-model="msg">
         <p>姓名: {{ msg | reverse }}</p>
+        <p>{{ "lower cap string" | uppercase }}</p> // 结果：LOWER CAP STRING
+        <p>{{ "TANK is GOOD" | lowercase }}</p> // 结果：tank is good
+        <p>{{1490161945000 | date:"yyyy-MM-dd HH:mm:ss"}}</p> // 2017-03-22 13:52:25
+        <p>{{149016.1945000 | number:2}}</p>
+        <p>{{ 250 | currency }}</p>  // 结果：$250.00
+        <p>{{ 250 | currency:"RMB ￥ " }}</p> // 结果：RMB ￥ 250.00
+        <p></p>
+        {{ [{"age": 20,"id": 10,"name": "iphone"},
+        {"age": 12,"id": 11,"name": "sunm xing"},
+        {"age": 44,"id": 12,"name": "test abc"}
+        ] | filter:{'name':'iphone'} }}
+        <p>{{"1234567890" | limitTo :6}}</p> // 从前面开始截取6位
+        <p>{{"1234567890" | limitTo:-4}}</p>// 从后面开始截取4位
+        <p>// 根id降序排</p>
+        <p></p>
+        {{ [{"age": 20,"id": 10,"name": "iphone"},
+        {"age": 12,"id": 11,"name": "sunm xing"},
+        {"age": 44,"id": 12,"name": "test abc"}
+        ] | orderBy:'id':true }}
+        <p>// 根据id升序排</p>
+        <p></p>
+        {{ [{"age": 20,"id": 10,"name": "iphone"},
+        {"age": 12,"id": 11,"name": "sunm xing"},
+        {"age": 44,"id": 12,"name": "test abc"}
+        ] | orderBy:'id' }}
     </div>
     <script src="namesController.js"></script>
 </body>

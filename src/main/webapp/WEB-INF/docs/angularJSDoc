@@ -78,8 +78,21 @@ lowercase	格式化字符串为小写。
 orderBy	根据某个表达式排列数组。
 uppercase	格式化字符串为大写。
 
-
-
+1、uppercase，lowercase 大小写转换
+{{ "lower cap string" | uppercase }}   // 结果：LOWER CAP STRING
+{{ "TANK is GOOD" | lowercase }}      // 结果：tank is good
+2、date 格式化
+{{1490161945000 | date:"yyyy-MM-dd HH:mm:ss"}} // 2017-03-22 13:52:25
+3、number 格式化（保留小数）
+{{149016.1945000 | number:2}}
+4、currency货币格式化
+{{ 250 | currency }}            // 结果：$250.00
+{{ 250 | currency:"RMB ￥ " }}  // 结果：RMB ￥ 250.00
+5、filter查找
+{{ [{"age": 20,"id": 10,"name": "iphone"},
+{"age": 12,"id": 11,"name": "sunm xing"},
+{"age": 44,"id": 12,"name": "test abc"}
+] | filter:{'name':'iphone'} }}
 
 
 

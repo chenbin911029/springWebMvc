@@ -94,7 +94,28 @@ uppercase	格式化字符串为大写。
 {"age": 44,"id": 12,"name": "test abc"}
 ] | filter:{'name':'iphone'} }}
 
+2017-11-13
+AngularJS 服务(Service)
+AngularJS 内建了30 多个服务。
+有个 $location 服务，它可以返回当前页面的 URL 地址。
+$timeout 可用于设置单次或多次延时服务;
+$interval 可用于设置始终运行的延时服务。
 
+xmlHttpRequest
+$http.get('/someUrl', config).then(successCallback, errorCallback);
+$http.post('/someUrl', data, config).then(successCallback, errorCallback);
+
+$http.get
+$http.head
+$http.post
+$http.put
+$http.delete
+$http.jsonp
+$http.patch
+
+AngularJS Select(选择框)
+ng-repeat 有局限性，选择的值是一个字符串:
+使用 ng-options 指令，选择的值是一个对象：
 
 
 

@@ -1,5 +1,7 @@
 package com.springmvc.controller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.springmvc.pojo.Student;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -39,6 +42,37 @@ public class Test {
         model.addAttribute("success","dear "+student.getFirstName()+"," +
                 "your Registration completed successfully");
         return "success";
+    }
+
+    @RequestMapping(value="/testJson", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject testJson(){
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+
+        JSONObject jsonObject1 = new JSONObject();
+        jsonObject1.put("Name","菜鸟教程");
+        jsonObject1.put("Country","CN");
+
+        JSONObject jsonObject2 = new JSONObject();
+        jsonObject2.put("Name","Google");
+        jsonObject2.put("Country","USA");
+
+        JSONObject jsonObject3 = new JSONObject();
+        jsonObject3.put("Name","Facebook");
+        jsonObject3.put("Country","UK");
+
+        jsonArray.add(jsonObject1);
+        jsonArray.add(jsonObject2);
+        jsonArray.add(jsonObject3);
+
+        jsonObject.put("sites",jsonArray);
+        return jsonObject;
+    }
+
+    @RequestMapping(value="/XmlHttpRequest")
+    public String XmlHttpRequest(){
+        return "angular/XmlHttpRequest";
     }
 
     /*

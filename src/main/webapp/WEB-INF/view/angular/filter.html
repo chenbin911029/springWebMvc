@@ -20,6 +20,9 @@
             <!--自定义过滤器aa-->
             <div class="" ng-bind="myName | aa" style="color:blue;">
             </div>
+            <div>
+                <p>newString:{{"jj" | myfilter:1:2:3:5}}</p>
+            </div>
         </div>
 
         <script>
@@ -42,6 +45,13 @@
                 //reverse()将数组反转，join("")将数组变成字符串
                 return function(val){
                     return val.split("").reverse().join("");
+                }
+            });
+
+            app.filter('myfilter',function(){
+                return function(text){
+                    var newArguments = Array.prototype.slice.call(arguments);
+                    return text+newArguments.join(',');
                 }
             });
         </script>

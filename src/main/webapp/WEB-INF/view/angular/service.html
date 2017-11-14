@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="https://cdn.bootcss.com/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body ng-app="myApp6">
+    <div ng-controller="myCtrl">
+        <p>当前页面的url:</p>
+        <h3>{{myUrl}}</h3>
+        <p>欢迎信息:</p>
+        <div>{{myWelcome}}</div>
+        <p>两秒后显示信息:</p>
+        <h1>{{myHeader}}</h1>
+        <p>现在时间是</p>
+        <h1>{{theTime}}</h1>
+        <p>$interval 访问在指定的周期(以毫秒计)来调用函数或计算表达式。</p>
+        <p>255 的16进制是:</p>
+        <h1>{{hex}}</h1>
+        <p>在过滤器中使用服务:266的16进制</p>
+        <h1>{{266 | myFormat}}</h1>
+        <p>在获取数组 [255, 251, 200] 值时使用过滤器:</p>
+        <div>
+            <ul>
+                <li ng-repeat="x in counts">{{x | myFormat}}</li>
+            </ul>
+        </div>
+        <p>过滤器使用服务将10进制转换为16进制。</p>
+        <b>姓：</b><input type="text" ng-model = "lastName"><br>
+        <b>名：</b><input type="text" ng-model="firstName"><br>
+        <p>{{ lastName + " " + firstName }}</p>
+        <p>{{ fullName }}</p>
+    </div>
+
+    <div>
+        <p ng-controller='father'>
+            <span ng-controller='son'>
+                {{father()}}
+            </span>
+        </p>
+    </div>
+    <script>
+        var app = angular.module('myApp6',[]);
+        //创建自定义服务
+        app.service('hexafy', function() {
+            this.myFunc = function (x) {
+                return x.toString(16);
+            }
+        });
+
+        app.controller('myCtrl',
+            function($scope,
+                     $location,
+                     $http,
+                     $timeout,
+                     $interval,
+                     hexafy){
+            $scope.myUrl = $location.absUrl();
+
+            //$http 服务
+            $http.get("filter.html").then(function (response){
+                $scope.myWelcome = response.data;
+            });
+
+            //$timeout 服务
+            $scope.myHeader = "Hello yuxia";
+            $timeout(function (){
+                $scope.myHeader = "How are you today?";
+            },2000);
+
+            //$interval 服务
+            $scope.theTime = new Date().toLocaleTimeString();
+            $interval(function(){
+                $scope.theTime = new Date().toLocaleTimeString();
+            },1000);
+
+            $scope.hex= hexafy.myFunc(1000);
+            $scope.counts = [255,251,200];
+            $scope.lastName = "";
+            $scope.firstName = "";
+
+            //监听lastName的变化，更新fullName
+            $scope.$watch('lastName',function(){
+                $scope.fullName = $scope.lastName + " " + $scope.firstName;
+            });
+
+            //监听firstName的变化，更新fullName
+            $scope.$watch('firstName', function() {
+                $scope.fullName = $scope.lastName + " " + $scope.firstName;
+            });
+        });
+
+        app.filter('myFormat',['hexafy',function(hexafy){
+            return function(x) {
+                return hexafy.myFunc(x);
+            }
+        }]);
+
+        app.controller('father',function($scope){
+            $scope.father = function(){
+                return 'I am father.';
+            }
+        });
+
+        app.controller('son',function($scope){
+
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+

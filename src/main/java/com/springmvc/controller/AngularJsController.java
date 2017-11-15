@@ -36,9 +36,14 @@ public class AngularJsController {
         jsonObject3.put("Name","Facebook");
         jsonObject3.put("Country","英国");
 
+        JSONObject jsonObject4 = new JSONObject();
+        jsonObject4.put("Name","angular");
+        jsonObject4.put("Country","加拿大");
+
         jsonArray.add(jsonObject1);
         jsonArray.add(jsonObject2);
         jsonArray.add(jsonObject3);
+        jsonArray.add(jsonObject4);
 
         jsonObject.put("records",jsonArray);
         return jsonObject;

@@ -9,91 +9,17 @@
                           http://www.springframework.org/schema/context/spring-context-4.3.xsd
                           http://www.springframework.org/schema/aop
                           http://www.springframework.org/schema/aop/spring-aop-4.3.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-    <!--包扫描 -->
-    <context:component-scan base-package="com.springmvc" />
-    <mvc:annotation-driven
-            conversion-service="conversionService"
-            validator="validator"
-            content-negotiation-manager="contentNegotiationManager"/>
+    <!-- 配置自定扫描的包 -->
+    <context:component-scan base-package="com.springmvc"/>
+    <!--mvc注解驱动 -->
+    <mvc:annotation-driven></mvc:annotation-driven>
 
-    <!--<mvc:resources mapping="/static/**" location="/static/" />-->
-
+    <!-- 配置视图解析器: 如何把 handler 方法返回值解析为实际的物理视图 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/view/" />
         <property name="suffix" value=".jsp" />
     </bean>
 
-    <!-- ################################全局转换############################## -->
-    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
-        <!--<property name="converters">
-            <set>
-                <bean class="com.angelina.action.SampleAction$StringToFormAttributeConverter"/>
-            </set>
-        </property>
-        <property name="formatters">
-            <set>
-                <bean class="com.angelina.action.SampleAction$BigDecimalFormatter">
-                    <property name="decimalOr" value="true"/>
-                </bean>
-            </set>
-        </property>-->
-    </bean>
-
-    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
-        <property name="validationMessageSource" ref="messageSource"/>
-    </bean>
-
-    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-        <property name="useCodeAsDefaultMessage" value="false"/>
-        <property name="fallbackToSystemLocale" value="false"/>
-        <property name="basenames">
-            <list>
-
-            </list>
-        </property>
-    </bean>
-
-    <!--
-        Content-Type/Accept(请求应答)消息协商管理器。
-        策略：
-            通过文件后缀：/users/fred.pdf请求一个pdf资源。
-            通过HTTP头中Accept：/users/fred请求一个pdf资源。
-    -->
-    <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
-        <property name="favorPathExtension" value="true"/>
-        <property name="favorParameter" value="false"/>
-        <property name="ignoreAcceptHeader" value="false"/>
-        <property name="defaultContentType" value="text/html"/>
-        <property name="mediaTypes">
-            <props>
-                <prop key="pdf">application/pdf</prop>
-                <prop key="xsl">application/vnd.ms-excel</prop>
-                <prop key="xml">application/xml</prop>
-                <prop key="json">application/json</prop>
-            </props>
-        </property>
-    </bean>
-
-    <!--
-        Content-Type/Accept(请求应答)内容协商ViewResolver。
-    -->
-    <bean id="contentNegotiatingViewResolver" class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-        <property name="order" value="0"/>
-        <property name="contentNegotiationManager" ref="contentNegotiationManager"/>
-        <property name="defaultViews">
-            <list>
-                <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
-                    <property name="encoding" value="UTF8"/>
-                    <property name="prettyPrint" value="true"/>
-                    <property name="exposePathVariables" value="true"/>
-                    <property name="extractValueFromSingleKeyModel" value="true"/>
-                </bean>
-                <!--<bean class="com.angelina.action.view.PdfView"/>
-                <bean class="com.angelina.action.view.JExcelView"/>
-                <bean class="com.angelina.action.view.EncryptView"/>-->
-            </list>
-        </property>
-    </bean>
 
 
     <!--文件处理 -->

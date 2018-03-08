@@ -21,6 +21,61 @@
         </tr>
     </table>
 </form:form>
+
+<a href="testServletAPI">Test ServletAPI</a>
+<br><br>
+
+<form action="testPojo" method="post">
+    username: <input type="text" name="username"/>
+    <br>
+    password: <input type="password" name="password"/>
+    <br>
+    email: <input type="text" name="email"/>
+    <br>
+    age: <input type="text" name="age"/>
+    <br>
+    city: <input type="text" name="address.city"/>
+    <br>
+    province: <input type="text" name="address.province"/>
+    <br>
+    <input type="submit" value="Submit"/>
+</form>
+<br><br>
+
+<a href="testCookieValue">Test CookieValue</a>
+<br><br>
+
+<a href="testRequestHeader">Test RequestHeader</a>
+<br><br>
+
+<a href="testRequestParam?username=atguigu&age=11">Test RequestParam</a>
+<br><br>
+
+<form action="testRest/1" method="post">
+    <input type="hidden" name="_method" value="PUT"/>
+    <input type="submit" value="TestRest PUT"/>
+</form>
+<br><br>
+
+<form action="testRest/1" method="post">
+    <input type="hidden" name="_method" value="DELETE"/>
+    <input type="submit" value="TestRest DELETE"/>
+</form>
+<br><br>
+
+<form action="testRest" method="post">
+    <input type="submit" value="TestRest POST"/>
+</form>
+<br><br>
+
+<a href="testRest/1">Test Rest Get</a>
+<br><br>
+
+
+
+
+
+
 </body>
 </html>
 

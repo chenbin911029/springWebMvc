@@ -25,6 +25,184 @@ User---------------->DispatcherServlet(中央控制器)-------------------------
         视图               视图解析器                        4.通过处理器适配器，调用具体的处理器
         view               ViewResolver
 
+<web-app>
+    <servlet>
+        <servlet-name>example</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>example</servlet-name>
+        <url-pattern>/example/*</url-pattern>
+    </servlet-mapping>
+
+</web-app>
+
+DispatcherServlet，Spring MVC 在您的Web应用程序的目录中查找名为
+ [servlet-name] -servlet.xml的WEB-INF文件，
+并创建在那里定义的bean，覆盖全局范围中具有相同名称的所有bean的定义。
+<web-app>
+    <servlet>
+        <servlet-name>golfing</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>golfing</servlet-name>
+        <url-pattern>/golfing/*</url-pattern>
+    </servlet-mapping>
+</web-app>
+With the above Servlet configuration in place,
+you will need to have a file called /WEB-INF/golfing-servlet.xml
+in your application;
+
+HandlerMapping，HandlerAdapter，HandlerExceptionResolver
+ViewResolver，LocaleResolver & LocaleContextResolver，
+ThemeResolver，MultipartResolver，FlashMapManager
+
+22.3.2 Mapping Requests With @RequestMapping
+@RequestMapping("/spring-web/{symbolicName:[a-z-]+}-{version:\\d\\.\\d\\.\\d}{extension:\\.[a-z]+}")
+public void handle(@PathVariable String version, @PathVariable String extension) {
+    // ...
+}
+
+Path Patterns
+GetMapping
+@PostMapping
+@PutMapping
+@DeleteMapping
+@PatchMapping
+
+如果您打算读取和写入XML，则需要MarshallingHttpMessageConverter
+使用包中的特定Marshaller和Unmarshaller 实现进行配置
+<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+    <property name="messageConverters">
+        <util:list id="beanList">
+            <ref bean="stringHttpMessageConverter"/>
+            <ref bean="marshallingHttpMessageConverter"/>
+        </util:list>
+    </property
+</bean>
+
+<bean id="stringHttpMessageConverter"
+        class="org.springframework.http.converter.StringHttpMessageConverter"/>
+
+<bean id="marshallingHttpMessageConverter"
+        class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+    <property name="marshaller" ref="castorMarshaller"/>
+    <property name="unmarshaller" ref="castorMarshaller"/>
+</bean>
+
+<bean id="castorMarshaller" class="org.springframework.oxm.castor.CastorMarshaller"/>
+
+@RestController is a stereotype annotation that combines
+@ResponseBody and @Controller. More than that, it gives more meaning
+to your Controller and also may carry additional semantics in future
+releases of the framework.
+
+
+A controller can have any number of @ModelAttribute methods.
+All such methods are invoked before @RequestMapping methods
+of the same controller.
+
+@ModelAttribute
+public Account addAccount(@RequestParam String number) {
+    return accountManager.findAccount(number);
+}
+
+// Add multiple attributes
+
+@ModelAttribute
+public void populateModel(@RequestParam String number, Model model) {
+    model.addAttribute(accountManager.findAccount(number));
+    // add more ...
+}
+
+@PostMapping("/owners/{ownerId}/pets/{petId}/edit")
+public String processSubmit(@ModelAttribute Pet pet) { }
+
+@PutMapping("/accounts/{account}")
+public String save(@ModelAttribute("account") Account account) {
+    // ...
+}
+
+@RequestMapping("/")
+public String handle(@SessionAttribute User user) {
+    // ...
+}
+
+Mapping cookie values with the @CookieValue annotation
+@RequestMapping("/displayHeaderInfo.do")
+public void displayHeaderInfo(@CookieValue("JSESSIONID") String cookie) {
+    //...
+}
+
+22.4处理程序映射 Handler mappings
+<bean>
+    <bean  class = “org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping” >
+        <property  name = “interceptors” >
+            <bean  class = “example.MyInterceptor” />
+        </ property>
+    </ bean>
+<beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -20,7 +20,11 @@
         <property name="suffix" value=".jsp" />
     </bean>
 
-
+    <!-- 配置国际化资源文件 -->
+    <bean id="messageSource"
+          class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="i18n"></property>
+    </bean>
 
     <!--文件处理 -->
     <bean id = "multipartResolver"

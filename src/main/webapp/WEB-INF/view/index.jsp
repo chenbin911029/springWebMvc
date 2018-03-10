@@ -22,6 +22,32 @@
     </table>
 </form:form>
 
+<a href="testViewAndViewResolver">Test ViewAndViewResolver</a>
+<br><br>
+<!--
+		模拟修改操作
+		1. 原始数据为: 1, Tom, 123456,tom@atguigu.com,12
+		2. 密码不能被修改.
+		3. 表单回显, 模拟操作直接在表单填写对应的属性值
+	-->
+<form action="testModelAttribute" method="Post">
+    <input type="hidden" name="id" value="1"/>
+    username: <input type="text" name="username" value="Tom"/>
+    <br>
+    email: <input type="text" name="email" value="tom@atguigu.com"/>
+    <br>
+    age: <input type="text" name="age" value="12"/>
+    <br>
+    <input type="submit" value="Submit"/>
+</form>
+<br><br>
+<a href="testSessionAttributes">Test SessionAttributes</a>
+<br><br>
+<a href="testMap">Test Map</a>
+<br><br>
+<a href="testModelAndView">Test ModelAndView</a>
+<br><br>
+
 <a href="testServletAPI">Test ServletAPI</a>
 <br><br>
 

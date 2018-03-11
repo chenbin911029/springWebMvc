@@ -1,10 +1,8 @@
 package com.springTask;
 
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * 任务2
@@ -28,8 +26,8 @@ public class TaskJob2 {
          * 通配符
          ? 你不想设置那个字段
      */
-    @Scheduled(cron="0 0/1 * * * ?")
-    public void job() {
-        System.out.println(String.format("任务2，执行中，%s",dateFormat.format(new Date())));
-    }
+//    @Scheduled(cron="0 0/1 * * * ?")
+//    public void job() {
+//        System.out.println(String.format("任务2，执行中，%s",dateFormat.format(new Date())));
+//    }
 }

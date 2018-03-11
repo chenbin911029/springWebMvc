@@ -21,6 +21,8 @@
         </tr>
     </table>
 </form:form>
+
+
 <a href="testRedirect">Test Redirect</a>
 <br><br>
 <a href="testView">Test View</a>

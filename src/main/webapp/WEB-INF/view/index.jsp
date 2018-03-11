@@ -21,6 +21,10 @@
         </tr>
     </table>
 </form:form>
+<a href="testRedirect">Test Redirect</a>
+<br><br>
+<a href="testView">Test View</a>
+<br><br>
 
 <a href="testViewAndViewResolver">Test ViewAndViewResolver</a>
 <br><br>

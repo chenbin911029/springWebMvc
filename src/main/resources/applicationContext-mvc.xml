@@ -83,6 +83,12 @@
           class="org.springframework.web.servlet.i18n.SessionLocaleResolver"></bean>
 
     <mvc:interceptors>
+        <bean class="com.springmvc.interceptors.FirstInterceptor" ></bean>
+        <!-- 配置拦截器(不)作用的路径 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/emps"/>
+            <bean class="com.springmvc.interceptors.SecondInterceptor"></bean>
+        </mvc:interceptor>
         <!-- 配置 LocaleChanceInterceptor -->
         <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"></bean>
     </mvc:interceptors>
@@ -94,6 +100,7 @@
     <!--文件处理 -->
     <bean id = "multipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
-        <property name="maxUploadSize" value="1048576" />
+        <property name="defaultEncoding" value="UTF-8"></property>
+        <property name="maxUploadSize" value="5242880"></property>
     </bean>
 </beans>

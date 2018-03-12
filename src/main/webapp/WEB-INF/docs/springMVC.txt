@@ -147,29 +147,147 @@ public void displayHeaderInfo(@CookieValue("JSESSIONID") String cookie) {
     </ bean>
 <beans>
 
+22.5.2 Chaining ViewResolvers
+Spring supports multiple view resolvers. Thus you can chain resolvers and,
+for example, override specific views in certain circumstances.
+You chain view resolvers by adding more than one resolver to your application
+context and, if necessary, by setting the order property to specify ordering.
+Remember, the higher the order property, the later the view resolver is
+positioned in the chain.
 
+<bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+    <property name="prefix" value="/WEB-INF/jsp/"/>
+    <property name="suffix" value=".jsp"/>
+</bean>
 
+<bean id="excelViewResolver" class="org.springframework.web.servlet.view.XmlViewResolver">
+    <property name="order" value="1"/>
+    <property name="location" value="/WEB-INF/views.xml"/>
+</bean>
 
+<!-- in views.xml -->
 
+<beans>
+    <bean name="report" class="org.springframework.example.ReportExcelView"/>
+</beans>
 
+The redirect: prefix
+The forward: prefix
 
+<bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 
+    <!-- one of the properties available; the maximum file size in bytes -->
+    <property name="maxUploadSize" value="100000"/>
 
+</bean>
 
+22.10.4 Handling a file upload in a form
+<html>
+    <head>
+        <title>Upload a file please</title>
+    </head>
+    <body>
+        <h1>Please upload a file</h1>
+        <form method="post" action="/form" enctype="multipart/form-data">
+            <input type="text" name="name"/>
+            <input type="file" name="file"/>
+            <input type="submit"/>
+        </form>
+    </body>
+</html>
 
+@Controller
+public class FileUploadController {
 
+    @PostMapping("/form")
+    public String handleFormUpload(@RequestParam("name") String name,
+            @RequestParam("file") MultipartFile file) {
 
+        if (!file.isEmpty()) {
+            byte[] bytes = file.getBytes();
+            // store the bytes somewhere
+            return "redirect:uploadSuccess";
+        }
 
+        return "redirect:uploadFailure";
+    }
 
+}
 
+@PostMapping("/someUrl")
+public String onSubmit(@RequestPart("meta-data") MetaData metadata,
+        @RequestPart("file-data") MultipartFile file) {
 
+    // ...
 
+}
 
+22.11 Handling exceptions
+22.11.1 HandlerExceptionResolver
 
+@Controller
+public class SimpleController {
 
+    // @RequestMapping methods omitted ...
 
+    @ExceptionHandler(IOException.class)
+    public ResponseEntity<String> handleIOException(IOException ex) {
+        // prepare responseEntity
+        return responseEntity;
+    }
 
+}
 
+22.14.2 HTTP caching support for static resources
+<mvc:resources mapping="/resources/**" location="/public-resources/">
+    <mvc:cache-control max-age="3600" cache-public="true"/>
+</mvc:resources>
+
+@Configuration
+@EnableWebMvc
+public class WebConfig extends WebMvcConfigurerAdapter {
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/resources/**")
+                .addResourceLocations("/public-resources/")
+                .setCacheControl(CacheControl.maxAge(1, TimeUnit.HOURS).cachePublic());
+    }
+
+}
+
+22.16.5 Interceptors
+
+@Configuration
+@EnableWebMvc
+public class WebConfig extends WebMvcConfigurerAdapter {
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new LocaleInterceptor());
+        registry.addInterceptor(new ThemeInterceptor()).addPathPatterns("/**").excludePathPatterns("/admin/**");
+        registry.addInterceptor(new SecurityInterceptor()).addPathPatterns("/secure/*");
+    }
+
+}
+
+<mvc:interceptors>
+    <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
+    <mvc:interceptor>
+        <mvc:mapping path="/**"/>
+        <mvc:exclude-mapping path="/admin/**"/>
+        <bean class="org.springframework.web.servlet.theme.ThemeChangeInterceptor"/>
+    </mvc:interceptor>
+    <mvc:interceptor>
+        <mvc:mapping path="/secure/*"/>
+        <bean class="org.example.SecurityInterceptor"/>
+    </mvc:interceptor>
+</mvc:interceptors>
+
+<mvc:view-controller path="/" view-name="home"/>
+<mvc:resources mapping="/resources/**" location="/public-resources/"/>
 
 
 

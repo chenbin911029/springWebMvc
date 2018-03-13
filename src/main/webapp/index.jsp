@@ -8,6 +8,11 @@
 <body>
 <h2>Hello World!</h2>
 
+<br><br>
+<a href="testSimpleMappingExceptionResolver?i=2">Test SimpleMappingExceptionResolver</a>
+<br><br>
+<a href="testResponseStatusExceptionResolver?i=10">Test ResponseStatusExceptionResolver</a>
+
 <a href="testExceptionHandlerExceptionResolver?i=10">Test ExceptionHandlerExceptionResolver</a>
 <form action="testFileUpload" method="POST" enctype="multipart/form-data">
     File: <input type="file" name="file"/>

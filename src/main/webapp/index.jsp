@@ -9,6 +9,9 @@
 <h2>Hello World!</h2>
 
 <br><br>
+<a href="testDefaultHandlerExceptionResolver">Test DefaultHandlerExceptionResolver</a>
+
+<br><br>
 <a href="testSimpleMappingExceptionResolver?i=2">Test SimpleMappingExceptionResolver</a>
 <br><br>
 <a href="testResponseStatusExceptionResolver?i=10">Test ResponseStatusExceptionResolver</a>

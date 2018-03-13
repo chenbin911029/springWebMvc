@@ -16,4 +16,12 @@ public class SpringMVCTestExceptionHandler {
         mv.addObject("exception", ex);
         return mv;
     }
+
+    @ExceptionHandler({Exception.class})
+    public ModelAndView exception(Exception ex){
+        System.out.println("----> 出异常了: " + ex);
+        ModelAndView mv = new ModelAndView("error");
+        mv.addObject("exception", ex);
+        return mv;
+    }
 }
